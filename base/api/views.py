@@ -8,6 +8,21 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import User
 from base.models import Task
 
+@api_view(['GET'])
+def apiOverview(request):
+    api_urls = {
+        'List': '/task-list/',
+        'Create': '/task-create/',
+        'Update': '/task-update/<str:pk>/',
+        'Delete': '/task-delete/<str:pk>/',
+        'token': '/token/',
+        'token refresh': '/token/refresh/',
+        'create user': '/user/create/',
+    }
+
+    return Response(api_urls)
+
+
 @api_view(['POST'])
 def createUser(request):
     serializer = RegisterSerializer(data=request.data)
